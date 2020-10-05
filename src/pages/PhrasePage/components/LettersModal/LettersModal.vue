@@ -1,13 +1,15 @@
 <template>
   <div class="letters-modal" v-on:click="animateLetters">
+    <!-- add close-btn -->
+
     <div class="letters-modal__content">
       <!-- блок для сбора фразы -->
       <div class="letters-modal__phrase-inner" ref="phraseInner"></div>
       <!-- анимируемый по буквам текст -->
       <div class="letters-modal__text">
         <span
-          class="letters-modal__letter"
           v-for="(letter, index) in lettersArr"
+          class="letters-modal__letter"
           :ref="`letterRef-${index}`"
           :key="index"
           :style="[letter.stylesParams.currentTransform, letter.stylesParams.baseStyle]"
@@ -27,7 +29,7 @@ export default {
   },
   data: () => {
     return {
-      lettersArr: []
+      lettersArr: [],
     }
   },
   created() { // первоначальная настройка компонента
@@ -37,9 +39,9 @@ export default {
           transform: 'translate(0px, 0px)',
         },
         baseStyle: {
-          transition: (Math.random() * (4 - 0.5) + 0.5).toFixed(1) + 's',
+          transition: (Math.random() * (4 - 0.7) + 0.7).toFixed(1) + 's cubic-bezier(0, 0.55, 0.45, 1)',
           width: letter.value === ' ' ? '5px' : 'auto', // против схлопывания пробела
-        }
+        },
       }
 
       return letter
@@ -79,7 +81,7 @@ export default {
         const letterFirstTransformY = directionY + Math.floor(Math.random() * maxTransformY);
 
         letter.stylesParams.firstTransform = {
-          transform: `translate(${letterFirstTransformX}px, ${letterFirstTransformY}px)`,
+          transform: `translate(${letterFirstTransformX}px, ${letterFirstTransformY}px) scale(${Math.random() * (2 - 0.5) + 0.5})`,
         }
 
         let transformXToPoint = 0;
@@ -97,7 +99,7 @@ export default {
           transform: `translate(${transformXToPoint}px, ${transformYToPoint}px)`,
         }
 
-        return letter
+        return letter;
       })
     },
     animateLetters() {
@@ -107,11 +109,12 @@ export default {
           return letter
         })
 
-      }, 1000)
+      }, 1200)
 
       setTimeout(() => {
         this.lettersArr = this.lettersArr.map(letter => {
           letter.stylesParams.currentTransform = letter.stylesParams.lastTransform
+          letter.stylesParams.currentClass = letter.stylesParams.class;
           return letter
         })
 
@@ -140,6 +143,7 @@ export default {
   margin: 0 auto;
   padding: 0 20px;
   font-size: 24px;
+  color: #302727;
   font-variant: small-caps;
   text-transform: lowercase;
 }

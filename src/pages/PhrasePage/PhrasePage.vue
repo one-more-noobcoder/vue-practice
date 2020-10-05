@@ -1,7 +1,9 @@
 <template>
   <div class="page phrase-page">
     <!-- модальное окно для анимации -->
-    <LettersModal v-if="activeCard" :letters="activeCard.textLetters" />
+    <transition name="letters-modal-transition">
+      <LettersModal v-if="activeCard" :letters="activeCard.textLetters" />
+    </transition>
 
     <div class="page__container page__container_size_middle">
       <PageTitle combinedTitle titleText="text" extraText="secret meaning" />
@@ -22,6 +24,8 @@
           </div>
         </div>
       </div>
+
+      <TestLetters />
     </div>
   </div>
 </template>
@@ -33,8 +37,10 @@ import LettersModal from './components/LettersModal/LettersModal';
 import PageTitle from '../../components/PageTitle/PageTitle';
 import Message from '../../components/Message/Message';
 
+import TestLetters from './components/TestLetters/TestLetters';
+
 export default {
-  components: { Form, PageTitle, Message, LettersModal },
+  components: { Form, PageTitle, Message, LettersModal, TestLetters },
   data: () => {
     return {
       textCards: [],
@@ -154,6 +160,16 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+/* transition */
+.letters-modal-transition-enter {
+  opacity: 0;
+}
+
+.letters-modal-transition-enter-active,
+.letters-modal-transition-leave-active {
+  transition: 0.5s opacity;
 }
 
 @media screen and (max-width: 870px) {
