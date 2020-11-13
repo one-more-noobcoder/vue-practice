@@ -2,7 +2,11 @@
   <div class="page phrase-page">
     <!-- модальное окно для анимации -->
     <transition name="letters-modal-transition">
-      <LettersModal v-if="activeCard" :letters="activeCard.textLetters" />
+      <LettersModal
+        v-if="activeCard"
+        :letters="activeCard.textLetters"
+        v-on:close-modal="deleteActiveTextCard"
+      />
     </transition>
 
     <div class="page__container page__container_size_middle">
@@ -10,7 +14,11 @@
 
       <div class="phrase-page__content">
         <Form v-on:setTextCard="setTextCard" />
-        <Message class="phrase-page__message" :messageTitle="messageText.title" :messageText="messageText.text" />
+        <Message
+          class="phrase-page__message"
+          :messageTitle="messageText.title"
+          :messageText="messageText.text"
+        />
       </div>
 
       <div v-if="textCards.length" class="phrase-page__cards">
@@ -24,8 +32,6 @@
           </div>
         </div>
       </div>
-
-      <TestLetters />
     </div>
   </div>
 </template>
@@ -37,10 +43,8 @@ import LettersModal from './components/LettersModal/LettersModal';
 import PageTitle from '../../components/PageTitle/PageTitle';
 import Message from '../../components/Message/Message';
 
-import TestLetters from './components/TestLetters/TestLetters';
-
 export default {
-  components: { Form, PageTitle, Message, LettersModal, TestLetters },
+  components: { Form, PageTitle, Message, LettersModal },
   data: () => {
     return {
       textCards: [],
@@ -63,6 +67,9 @@ export default {
     },
     setActiveTextCard(id) {
       this.activeCard = this.textCards.find(card => card.id === id)
+    },
+    deleteActiveTextCard() {
+      this.activeCard = null;
     }
   },
 };
@@ -163,7 +170,8 @@ export default {
 }
 
 /* transition */
-.letters-modal-transition-enter {
+.letters-modal-transition-enter,
+.letters-modal-transition-leave-to {
   opacity: 0;
 }
 

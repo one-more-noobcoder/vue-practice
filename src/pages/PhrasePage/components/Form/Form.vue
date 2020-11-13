@@ -1,6 +1,6 @@
 <template>
   <div class="form">
-    <textarea class="form__textarea" id="textarea" v-model="text" :placeholder="placeholder" maxlength="120"></textarea>
+    <textarea class="form__textarea" id="textarea" v-model="text" :placeholder="placeholder" maxlength="100"></textarea>
 
     <div class="form__box-footer">
       <button
@@ -21,7 +21,7 @@ export default {
     return {
       text: "",
       placeholder: 'Место для текста...',
-      phrases: ["ты пидор", 'просто пес', "грешный пес", "пшеничный лось", "прихвостень", 'слыш псина'],
+      phrases: ["ты пидор", 'просто пес', "грешный пес", "пшеничный лось", "прихвостень", 'слыш псина', 'ебать ты лох'],
     };
   },
   computed: {
@@ -46,14 +46,13 @@ export default {
           this.$emit('setTextCard', textCard);
           this.text = '';
           this.placeholder = 'Место для текста...';
-          break
-        }
-
-        if (!lettersWithPhrase && i === this.phrases.length - 1) {
-          this.text = '';
-          this.placeholder = 'Данный текст не содержит тайного смысла, попробуйте другой';
+          return;
         }
       }
+
+      // если совпадений не было 
+      this.text = '';
+      this.placeholder = 'Данный текст не содержит тайного смысла, попробуйте другой';
     },
     mixPhrases() {
       this.phrases = this.phrases.sort(() => Math.random() - 0.5);
