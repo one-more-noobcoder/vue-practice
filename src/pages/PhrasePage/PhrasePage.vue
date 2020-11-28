@@ -1,5 +1,5 @@
 <template>
-  <div class="page phrase-page">
+  <div class="phrase-page">
     <!-- модальное окно для анимации -->
     <transition name="letters-modal-transition">
       <LettersModal
@@ -9,7 +9,7 @@
       />
     </transition>
 
-    <div class="page__container page__container_size_middle">
+    <div class="container">
       <PageTitle combinedTitle titleText="text" extraText="secret meaning" />
 
       <div class="phrase-page__content">

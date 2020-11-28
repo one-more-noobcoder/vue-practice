@@ -5,6 +5,15 @@
   box-sizing: border-box;
 }
 
+ul {
+  list-style: none;
+}
+
 #app {
   font-family: "Roboto", sans-serif;
+  position: relative;
+  min-height: 100vh;
+  background: #f8f8f8;
+  padding-top: 60px;
+  overflow: hidden;
 }
