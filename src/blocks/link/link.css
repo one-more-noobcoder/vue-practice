@@ -1,0 +1,15 @@
+a {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.link {
+  transition: 0.3s opacity;
+}
+
+.link:hover, .link:focus {
+  opacity: 0.7;
+}
+

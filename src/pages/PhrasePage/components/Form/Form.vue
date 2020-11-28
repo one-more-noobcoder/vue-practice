@@ -4,7 +4,7 @@
 
     <div class="form__box-footer">
       <button
-        class="btn btn_theme_red form__btn"
+        class="btn btn_type_common btn_theme_red form__btn"
         type="button"
         :disabled="disabledBtn"
         v-on:click="findSecretPhrase"
