@@ -14,6 +14,12 @@ import Header from './components/Header/Header';
 export default {
   name: "App",
   components: { Header },
+  beforeRouteEnter(to) {
+    console.log(to)
+  },
+  beforeRouteUpdate(to) {
+    console.log(to)
+  }
 };
 </script>
 

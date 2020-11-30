@@ -24,12 +24,12 @@ export default {
       navigationIsHidden: false,
     }
   },
-  created: function () {
-    this.isEmptyRoute = window.location.pathname === '/';
-  },
   watch: {
-    $route(to, from) {
-      this.isEmptyRoute = to.fullPath === '/';
+    '$route': {
+      immediate: true,
+      handler(to) {
+        this.isEmptyRoute = to.fullPath === '/';
+      }
     }
   }
 }
